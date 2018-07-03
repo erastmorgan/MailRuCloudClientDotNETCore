@@ -6,7 +6,12 @@
     <Authors>Erast Korolev</Authors>
     <Copyright>Erast Korolev</Copyright>
     <Version>1.0.1</Version>
-    <Description>Migration from .NET Standard 1.6 to .NET Core 2.0</Description>
+    <Description>Unofficial .NET Core version of library to working with the cloud.mail.ru API</Description>
+    <RepositoryUrl>https://github.com/erastmorgan/MailRuCloudClientDotNETCore</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/erastmorgan/MailRuCloudClientDotNETCore</PackageProjectUrl>
+    <PackageReleaseNotes>Migration from .NET Standard 1.6 to .NET Core 2.0</PackageReleaseNotes>
+    <PackageTags>cloud.mail.ru sdk mail.ru client</PackageTags>
+    <RepositoryType>Git</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
