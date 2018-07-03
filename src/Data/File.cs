@@ -201,5 +201,14 @@ namespace MailRuCloudClient.Data
         {
             return await this.Client.DownloadFile(this.FullPath);
         }
+
+        /// <summary>
+        /// Abort the run asynchronous tasks. Will be affected on download and upload operations.
+        /// </summary>
+        /// <param name="throwOnFirstException">True, if exception should immedeately propagate; otherwase, false.</param>
+        public void AbortAllAsyncTasks(bool throwOnFirstException)
+        {
+            this.Client.AbortAllAsyncTasks(throwOnFirstException);
+        }
     }
 }

@@ -11,3 +11,4 @@
 /tests/obj
 /tests/bin/Debug/netcoreapp2.0
 /src/obj
+/src/StyleCop.Cache
