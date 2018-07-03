@@ -3,3 +3,11 @@
 ################################################################################
 
 /.vs
+/MailRuCloudClient/bin/Debug/netcoreapp2.0
+/MailRuCloudClient/obj/Debug/netcoreapp2.0
+/MailRuCloudClient/obj
+/MailRuCloudClient.Tests/bin/Debug/netcoreapp2.0
+/MailRuCloudClient.Tests/obj
+/tests/obj
+/tests/bin/Debug/netcoreapp2.0
+/src/obj

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MailRuCloudClient", "src\MailRuCloudClient.csproj", "{A5472AB6-1892-4047-8990-B15A0D09FB9C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailRuCloudClient.Tests", "tests\MailRuCloudClient.Tests.csproj", "{97F6B92C-B942-4C7E-9D54-A6E1DC12DD82}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A5472AB6-1892-4047-8990-B15A0D09FB9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5472AB6-1892-4047-8990-B15A0D09FB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5472AB6-1892-4047-8990-B15A0D09FB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5472AB6-1892-4047-8990-B15A0D09FB9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97F6B92C-B942-4C7E-9D54-A6E1DC12DD82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97F6B92C-B942-4C7E-9D54-A6E1DC12DD82}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97F6B92C-B942-4C7E-9D54-A6E1DC12DD82}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97F6B92C-B942-4C7E-9D54-A6E1DC12DD82}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4CC3719B-F09D-4B5C-B512-7E8BFB4BB184}
+	EndGlobalSection
+EndGlobal
