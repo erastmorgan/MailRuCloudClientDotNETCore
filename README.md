@@ -2,8 +2,8 @@
 It is .net core version of client for cloud.mail.ru
 
 ### Nuget
-https://www.nuget.org/packages/MailRuCloudClient/1.0.2  
-PM> Install-Package MailRuCloudClient -Version 1.0.2  
+https://www.nuget.org/packages/MailRuCloudClient/1.0.3  
+PM> Install-Package MailRuCloudClient -Version 1.0.3  
 
 ### Usage  
 All examples of use, you can find in the tests:  
