@@ -1,0 +1,1636 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MailRuCloudClient</name>
+    </assembly>
+    <members>
+        <member name="T:MailRuCloudClient.Account">
+            <summary>
+            Defines the MAILRU account.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Account.cookies">
+            <summary>
+            Cookie container for account.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Account.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.Account" /> class.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Account.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.Account" /> class.
+            </summary>
+            <param name="email">Login as email.</param>
+            <param name="password">Password related with this login.</param>
+        </member>
+        <member name="P:MailRuCloudClient.Account.Email">
+            <summary>
+            Gets or sets login as email.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Account.Password">
+            <summary>
+            Gets or sets password.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Account.ActivatedTariffs">
+            <summary>
+            Gets the list of activated tariffs for account. Relogin the account to recalculation connected tariffs.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Account.Has2GBUploadSizeLimit">
+            <summary>
+            Gets a value indicating whether is turn on upload size limit on 2GB for account.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Account.AuthToken">
+            <summary>
+            Gets authorization token.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Account.Cookies">
+            <summary>
+            Gets or sets the account cookies.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Account.HttpClient">
+            <summary>
+            Gets or sets the HTTP client.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Account.Login">
+            <summary>
+            Login in cloud server.
+            </summary>
+            <exception cref="!:AuthorizeException">Authorization exception.</exception>
+            <returns>True or false result of operation.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Account.CheckAuthorization">
+            <summary>
+            Check the client current authorization. 
+            Do not call this method always before any request, by default it's enabled already.
+            </summary>
+            <returns>True - if client is in the system now.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Account.GetDiskUsage">
+            <summary>
+            Get disk usage for account.
+            </summary>
+            <returns>Returns Total/Free/Used size.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Account.CheckAuthorization(System.Boolean)">
+            <summary>
+            Check authorization options.
+            </summary>
+            <param name="baseCheckout">If true will check only Login and Password.</param>
+            <returns>The simple task.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Account.GetDiskUsageInternal(System.Boolean)">
+            <summary>
+            Get disk usage for account.
+            </summary>
+            <param name="checkAuthorization">When true, will be checked the authorization to MAILRU.</param>
+            <returns>Returns Total/Free/Used size.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Account.GetRates">
+            <summary>
+            Get the activated tariffs.
+            </summary>
+            <returns>The tariffs list.</returns>
+        </member>
+        <member name="T:MailRuCloudClient.CloudClient">
+            <summary>
+            General connector with MAILRU API.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.CloudClient.cancelToken">
+            <summary>
+            Async tasks cancelation token.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.CloudClient" /> class. Do not forget to set Account properties before using any API functions.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.#ctor(MailRuCloudClient.Account)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.CloudClient" /> class.
+            </summary>
+            <param name="account">Cloud account.</param>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.CloudClient" /> class. Do not forget to authorize account.
+            </summary>
+            <param name="email">Login name as the email.</param>
+            <param name="password">Password, associated with this email.</param>
+        </member>
+        <member name="T:MailRuCloudClient.CloudClient.ProgressChangedEventHandler">
+            <summary>
+            Changing progress event handler.
+            </summary>
+            <param name="sender">The event sender.</param>
+            <param name="e">The event arguments.</param>
+        </member>
+        <member name="E:MailRuCloudClient.CloudClient.ProgressChangedEvent">
+            <summary>
+            Changing progress event, works only for upload and download operations.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.CloudClient.Account">
+            <summary>
+            Gets or sets the related MAILRU account.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.GetFileOneTimeDirectLink(System.String)">
+            <summary>
+            Provides the one-time anonymous direct link to download the file. Important: the file should has the public link.
+            </summary>
+            <param name="publicLink">The public file link.</param>
+            <returns>One-time direct link.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.Publish``1(System.String)">
+            <summary>
+            Publish the file or folder.
+            </summary>
+            <typeparam name="T">The type of entry. File or folder.</typeparam>
+            <param name="sourceFullPath">The full file or folder path.</param>
+            <returns>The published file or folder info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.Unpublish``1(System.String)">
+            <summary>
+            Unpublish the file or folder.
+            </summary>
+            <typeparam name="T">The type of entry. File or folder.</typeparam>
+            <param name="publicLink">The public file or folder path.</param>
+            <returns>The unpublished file or folder info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.RestoreFileFromHistory(System.String,System.Int64,System.Boolean,System.String)">
+            <summary>
+            Restore the file from history.
+            </summary>
+            <param name="sourceFullPath">The source file full path.</param>
+            <param name="historyRevision">The unique history revision number from which will be the restoring.</param>
+            <param name="rewriteExisting">When true, an existing parent file will be overriden,
+            otherwise the file from history will be created as new.</param>
+            <param name="newFileName">The new file name. It will be applied only if previous parameter is false.</param>
+            <returns>The restored file info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.GetFileHistory(System.String)">
+            <summary>
+            Get the file history.
+            </summary>
+            <param name="sourceFullPath">The full file path in the cloud.</param>
+            <returns>The file modification history.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.Remove(System.String)">
+            <summary>
+            Remove the file or folder.
+            </summary>
+            <param name="sourceFullPath">The full path of file or folder in the cloud.</param>
+            <returns>The simple task.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.Rename``1(System.String,System.String)">
+            <summary>
+            Rename the cloud structure entry.
+            </summary>
+            <typeparam name="T">The entry type. Folder or file.</typeparam>
+            <param name="sourceFullPath">The source folder or file full path.</param>
+            <param name="name">The new name of file or folder.</param>
+            <returns>The renamed file or folder.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.Copy``1(System.String,System.String)">
+            <summary>
+            Copy the cloud structure entry.
+            </summary>
+            <typeparam name="T">The entry type. Folder or file.</typeparam>
+            <param name="sourceFullPath">Source folder or file full path.</param>
+            <param name="destFolderPath">The destination path of entry.</param>
+            <returns>The entry info in the new location of cloud.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.Move``1(System.String,System.String)">
+            <summary>
+            Move the cloud structure entry.
+            </summary>
+            <typeparam name="T">The entry type. Folder or file.</typeparam>
+            <param name="sourceFullPath">Source folder or file full path.</param>
+            <param name="destFolderPath">The destination path of entry.</param>
+            <returns>The entry info in the new location of cloud.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.CreateFolder(System.String)">
+            <summary>
+            Create all directories and subdirectories in the specified path unless they already exists.
+            </summary>
+            <param name="fullFolderPath">The full path of the new folder.</param>
+            <returns>The created folder info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.DownloadItemsAsZIPArchive(System.Collections.Generic.List{System.String},System.String,System.String)">
+            <summary>
+            Download the files and folders to ZIP archive by selected paths. 
+            All files and folders should be in the same folder.
+            </summary>
+            <param name="filesAndFoldersPaths">The full paths of the files and folders.</param>
+            <param name="destZipArchiveName">The output ZIP archive name. If not set, will be generated the GUID.</param>
+            <param name="destFolderPath">The destination folder on the local machine</param>
+            <returns>The downloaded ZIP archive info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.DownloadItemsAsZIPArchive(System.Collections.Generic.List{System.String},System.IO.Stream)">
+            <summary>
+            Download the files and folders to ZIP archive by selected paths. 
+            All files and folders should be in the same folder.
+            </summary>
+            <param name="filesAndFoldersPaths">The full paths of the files and folders.</param>
+            <param name="destStream">The destination ZIP archive stream.</param>
+            <returns>The simple task.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.DownloadItemsAsZIPArchive(System.Collections.Generic.List{System.String})">
+            <summary>
+            Download the files and folders to ZIP archive by selected paths. 
+            All files and folders should be in the same folder.
+            </summary>
+            <param name="filesAndFoldersPaths">The full paths of the files and folders.</param>
+            <returns>The network stream and his length.
+            The length inaccurate for ZIP archive, because it's not possible to compute.
+            Usually, the real length is larger, than specified.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.GetDirectLinkZIPArchive(System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            Provides the anonymous direct link to download of ZIP archive for selected files and folders.
+            </summary>
+            <param name="filesAndFoldersPaths">The files and folders paths list in cloud.</param>
+            <param name="destZipArchiveName">The output ZIP archive name. If not set, will be generated the GUID.</param>
+            <returns>The direct link to download as ZIP archive.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.DownloadFile(System.String,System.String,System.String)">
+            <summary>
+            Download the file from cloud.
+            </summary>
+            <param name="destFileName">The destination file name. If not set, will bw use the original file name.</param>
+            <param name="sourceFilePath">The full source file path in the cloud.</param>
+            <param name="destFolderPath">The destination file path on the local machine.</param>
+            <returns>The downloaded file on the local machine.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.DownloadFile(System.String,System.IO.Stream)">
+            <summary>
+            Download the file from cloud.
+            </summary>
+            <param name="sourceFilePath">The full source file path in the cloud.</param>
+            <param name="destStream">The destination stream.</param>
+            <returns>The simple task.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.DownloadFile(System.String)">
+            <summary>
+            Download the file from cloud.
+            </summary>
+            <param name="sourceFilePath">The full source file path in the cloud.</param>
+            <returns>The network stream and his length.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.UploadFile(System.String,System.String,System.String)">
+            <summary>
+            Upload the file in the cloud. Uploading limit 4GB.
+            </summary>
+            <param name="destFileName">The destination file name. If not set, will be use original file name.</param>
+            <param name="sourceFilePath">The source file path on the local machine.</param>
+            <param name="destFolderPath">The destination file folder path in the cloud.</param>
+            <returns>The created file info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.UploadFile(System.String,System.IO.Stream,System.String)">
+            <summary>
+            Upload the file in the cloud. Uploading limit 4GB.
+            </summary>
+            <param name="destFileName">The destination file name.</param>
+            <param name="content">The content as stream.</param>
+            <param name="destFolderPath">The destination file folder path in the cloud.</param>
+            <returns>The created file info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.GetFolder">
+            <summary>
+            Get the root folder info that include the list of files and folders. Folder object can contains only 1 level of sub items.
+            </summary>
+            <returns>Folder object.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.GetFolder(System.String)">
+            <summary>
+            Get the folder info that include the list of files and folders. Folder object can contains only 1 level of sub items.
+            </summary>
+            <param name="fullPath">Path from whence should be retrieved the items.</param>
+            <returns>An existing folder info or null if does not exists.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.AbortAllAsyncTasks(System.Boolean)">
+            <summary>
+            Abort the run asynchronous tasks. Will be affected on download and upload operations.
+            </summary>
+            <param name="throwOnFirstException">True, if exception should immedeately propagate; otherwase, false.</param>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.CreateFileOrFolder(System.Boolean,System.String,System.String,System.Int64,System.Boolean)">
+            <summary>
+            Create the new folder or file in the cloud.
+            </summary>
+            <param name="addFile">When true, will be created the file.</param>
+            <param name="path">The full path of the new entry.</param>
+            <param name="hash">The file hash.</param>
+            <param name="size">The file size.</param>
+            <param name="rewriteExisting">The conflict resolving method.</param>
+            <returns>The new file or folder name and full path.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.GetShardsInfo">
+            <summary>
+            Get shards info. Can be use for anonymous user.
+            </summary>
+            <returns>Shards info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.MoveOrCopyInternal``1(System.String,System.String,System.Boolean)">
+            <summary>
+            Move or copy the cloud structure entry.
+            </summary>
+            <typeparam name="T">The entry type. Folder or file.</typeparam>
+            <param name="sourceFullPath">Source folder or file full path.</param>
+            <param name="destFolderPath">The destination path of entry.</param>
+            <param name="move">When true, will be applied the moving operation.</param>
+            <returns>The entry info in the new location of cloud.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.CheckUnknownItemExisting``1(System.String)">
+            <summary>
+            Check the unknown cloud structure entry existing.
+            </summary>
+            <typeparam name="T">The type of entry.</typeparam>
+            <param name="sourceFullPath">The full path of entry.</param>
+            <returns>An existing entry..</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.PublishUnpublishInternal``1(System.String,System.Boolean)">
+            <summary>
+            Publish or unpublish the file or folder.
+            </summary>
+            <typeparam name="T">The type of entry. File or folder.</typeparam>
+            <param name="link">The full entry path or public link.</param>
+            <param name="publish">When true, the publish operation will be applied.</param>
+            <returns>The published ot unpublished entry info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.GetParentCloudPath(System.String)">
+            <summary>
+            Get the parent cloud path.
+            </summary>
+            <param name="path">The original path with subfolder or file at the end.</param>
+            <returns>The parent path.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.GetPathStartEndSlash(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Get and set the slash at the start and at the end of path. By default will be inserted at the both sides.
+            </summary>
+            <param name="path">Path to add slashes.</param>
+            <param name="setAtStart">Add slash at the start of path.</param>
+            <param name="setAtEnd">Add slash at the end of path.</param>
+            <returns>New path or old with has not changes.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.CloudClient.GetDefaultFormDataFields(System.String,System.Boolean)">
+            <summary>
+            Get the default form data fields.
+            </summary>
+            <param name="sourceFullPath">The home path file or folder..</param>
+            <param name="rewriteExisting">The conflict resolving, if the same entry already exists.</param>
+            <returns>The key/value pairs.</returns>
+        </member>
+        <member name="T:MailRuCloudClient.Data.AuthToken">
+            <summary>
+            Defines the authorization token data.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.AuthToken.Token">
+            <summary>
+            Gets or sets the authorization token.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Data.CloudStructureEntryBase">
+            <summary>
+            Defined the base class of cloud structure entry. It can be file or folder.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Data.CloudStructureEntryBase.#ctor(MailRuCloudClient.Account)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.Data.CloudStructureEntryBase"/> class.
+            </summary>
+            <param name="account">The MAILRU account.</param>
+        </member>
+        <member name="E:MailRuCloudClient.Data.CloudStructureEntryBase.ProgressChangedEvent">
+            <summary>
+            Changing progress event, works only for upload and download operations.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructureEntryBase.Name">
+            <summary>
+            Gets the item name.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructureEntryBase.Size">
+            <summary>
+            Gets the item size.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructureEntryBase.FullPath">
+            <summary>
+            Gets full item path in cloud.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructureEntryBase.PublicLink">
+            <summary>
+            Gets public item link to share without authentication.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructureEntryBase.Account">
+            <summary>
+            Gets the cloud account of MAILRU.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructureEntryBase.Client">
+            <summary>
+            Gets the cloud account of MAILRU.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry">
+            <summary>
+            Defines the DTO object of item for cloud structure.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry.Count">
+            <summary>
+            Gets or sets the number of elements for every unit type.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry.Tree">
+            <summary>
+            Gets or sets the unique value of current structure unit.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry.Name">
+            <summary>
+            Gets or sets the sctructure name.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry.Grev">
+            <summary>
+            Gets or sets the general revision.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry.Size">
+            <summary>
+            Gets or sets the size in bytes.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry.Sort">
+            <summary>
+            Gets or sets the sorting parameters.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry.Kind">
+            <summary>
+            Gets or sets the kind of structure.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry.Rev">
+            <summary>
+            Gets or sets the revision.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry.Type">
+            <summary>
+            Gets or sets the type of structure.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry.Home">
+            <summary>
+            Gets or sets the full path of the current structure in cloud.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry.Weblink">
+            <summary>
+            Gets or sets the public link to anonymously downloading.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry.Mtime">
+            <summary>
+            Gets or sets the last modified time.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry.Time">
+            <summary>
+            Gets or sets the structure requested time.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry.VirusScan">
+            <summary>
+            Gets or sets the virus scan comment.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry.Hash">
+            <summary>
+            Gets or sets the hash, if the current unit is file.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.CloudStructureEntry.List">
+            <summary>
+            Gets or sets the list of the nested items of the current structure.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Data.CloudStructure.Count">
+            <summary>
+            Defines the number of different entry types.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.Count.Folders">
+            <summary>
+            Gets or sets the number of folders.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.Count.Files">
+            <summary>
+            Gets or sets the number of files.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Data.CloudStructure.Sort">
+            <summary>
+            Defines the items sorting parameter.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.Sort.Order">
+            <summary>
+            Gets or sets the order type.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.CloudStructure.Sort.Type">
+            <summary>
+            Gets or sets the field by which did the sorting.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Data.DefaultResponse`1">
+            <summary>
+            Defines the default response from cloud API.
+            </summary>
+            <typeparam name="BodyType">The type of content.</typeparam>
+        </member>
+        <member name="P:MailRuCloudClient.Data.DefaultResponse`1.Email">
+            <summary>
+            Gets or sets the user email.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.DefaultResponse`1.Body">
+            <summary>
+            Gets or sets the response content.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.DefaultResponse`1.Status">
+            <summary>
+            Gets or sets the HTTP status code.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Data.DiskUsage">
+            <summary>
+            Disk usage on current account.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.DiskUsage.Total">
+            <summary>
+            Gets total disk size.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.DiskUsage.Used">
+            <summary>
+            Gets used disk size.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.DiskUsage.Free">
+            <summary>
+            Gets free disk size.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Data.File">
+            <summary>
+            File type of item on server.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.#ctor(MailRuCloudClient.Account)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.Data.File"/> class.
+            </summary>
+            <param name="account">The MAILRU account.</param>
+        </member>
+        <member name="P:MailRuCloudClient.Data.File.Hash">
+            <summary>
+            Gets file hash. SHA1 + SALT.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.File.LastModifiedTimeUTC">
+            <summary>
+            Gets last modified time of file in UTC format.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.GetFileOneTimeDirectLink">
+            <summary>
+            Provides the one-time anonymous direct link to download the file. Important: the file should has the public link.
+            </summary>
+            <returns>One-time direct link.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.Publish">
+            <summary>
+            Publish the current file.
+            </summary>
+            <returns>The published file info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.Unpublish">
+            <summary>
+            Unpublish the current file.
+            </summary>
+            <returns>The unpublished file info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.RestoreFileFromHistory(System.Int64,System.Boolean,System.String)">
+            <summary>
+            Restore the file from history.
+            </summary>
+            <param name="historyRevision">The unique history revision number from which will be the restoring.</param>
+            <param name="rewriteExisting">When true, an existing parent file will be overriden,
+            otherwise the file from history will be created as new.</param>
+            <param name="newFileName">The new file name. It will be applied only, if previous parameter is false.</param>
+            <returns>The restored file info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.GetFileHistory">
+            <summary>
+            Get the current file history.
+            </summary>
+            <returns>The file modification history.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.Remove">
+            <summary>
+            Remove the current file from cloud.
+            </summary>
+            <returns>The simple task.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.Rename(System.String)">
+            <summary>
+            Rename the current file.
+            </summary>
+            <param name="newName">The new name of file.</param>
+            <returns>The renamed file.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.Copy(System.String)">
+            <summary>
+            Copy the file to another space.
+            </summary>
+            <param name="destFolderPath">The destination path of current folder.</param>
+            <returns>The new file info in the new location.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.Move(System.String)">
+            <summary>
+            Move the file to another space.
+            </summary>
+            <param name="destFolderPath">The destination path of current folder.</param>
+            <returns>The file foler info in the new location.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.DownloadFileAsZIP(System.IO.Stream)">
+            <summary>
+            Download the current file from cloud as ZIP archive. Downloading limit 4GB.
+            </summary>
+            <param name="destStream">The destination stream.</param>
+            <returns>The simple task.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.DownloadFileAsZIP(System.String,System.String)">
+            <summary>
+            Download the current file from cloud as ZIP archive. Downloading limit 4GB.
+            </summary>
+            <param name="destZipArchiveName">The destination ZIP archive name. If not set, will bw use the original file name.</param>
+            <param name="destFolderPath">The destination file path on the local machine.</param>
+            <returns>The downloaded ZIP archive on the local machine.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.DownloadFileAsZIP">
+            <summary>
+            Download the current file from cloud as ZIP archive. Downloading limit 4GB.
+            </summary>
+            <returns>The network stream and his length.
+            The length inaccurate for ZIP archive, because it's not possible to compute.
+            Usually, the real length is larger, than specified.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.DownloadFile(System.String,System.String)">
+            <summary>
+            Download the current file from cloud.
+            </summary>
+            <param name="destFileName">The destination file name. If not set, will bw use the original file name.</param>
+            <param name="destFolderPath">The destination file path on the local machine.</param>
+            <returns>The downloaded file on the local machine.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.DownloadFile(System.IO.Stream)">
+            <summary>
+            Download the current file from cloud.
+            </summary>
+            <param name="destStream">The destination stream.</param>
+            <returns>The simple task.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.DownloadFile">
+            <summary>
+            Download the current file from cloud. Downloading limit 4GB.
+            </summary>
+            <returns>The network stream and his length.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.File.AbortAllAsyncTasks(System.Boolean)">
+            <summary>
+            Abort the run asynchronous tasks. Will be affected on download and upload operations.
+            </summary>
+            <param name="throwOnFirstException">True, if exception should immedeately propagate; otherwase, false.</param>
+        </member>
+        <member name="T:MailRuCloudClient.Data.Folder">
+            <summary>
+            Folder type of item on server. Folder object can contains only 1 level of sub items.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Data.Folder.prevDiskUsed">
+            <summary>
+            The previous value of used cloud disk space.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Data.Folder.lastItemsGettingTime">
+            <summary>
+            The last iems getting time.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.#ctor(MailRuCloudClient.Account)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.Data.Folder"/> class.
+            </summary>
+            <param name="account">The MAILRU account.</param>
+        </member>
+        <member name="T:MailRuCloudClient.Data.Folder.ContentChangedEventHandler">
+            <summary>
+            Changing folder content event handler.
+            </summary>
+            <param name="sender">The event sender.</param>
+            <param name="e">The folder info.</param>
+        </member>
+        <member name="E:MailRuCloudClient.Data.Folder.FolderContentChangedEvent">
+            <summary>
+            Changing folder content event, works only for upload and download operations.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Folder.FoldersCount">
+            <summary>
+            Gets number of folders in this folder on cloud.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Folder.FilesCount">
+            <summary>
+            Gets number of files in this folder on cloud.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Folder.Files">
+            <summary>
+            Gets the list of files in the current folder.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Folder.Folders">
+            <summary>
+            Gets the list of subfolders in the current folder.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Folder.Items">
+            <summary>
+            Gets or sets the entries list of cloud structure.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.Publish">
+            <summary>
+            Publish the current folder.
+            </summary>
+            <returns>The published folder info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.Unpublish">
+            <summary>
+            Unpublish the current folder.
+            </summary>
+            <returns>The unpublished folder info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.Remove">
+            <summary>
+            Remove the current folder from cloud.
+            </summary>
+            <returns>The simple task.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.Rename(System.String)">
+            <summary>
+            Rename the current folder.
+            </summary>
+            <param name="newName">The new name of folder.</param>
+            <returns>The renamed folder.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.Copy(System.String)">
+            <summary>
+            Copy the folder to another space.
+            </summary>
+            <param name="destFolderPath">The destination path of current folder.</param>
+            <returns>The new foler info in the new location.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.Move(System.String)">
+            <summary>
+            Move the folder to another space.
+            </summary>
+            <param name="destFolderPath">The destination path of current folder.</param>
+            <returns>The new foler info in the new location.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.DownloadItemsAsZIPArchive(System.Collections.Generic.List{System.String},System.String,System.String)">
+            <summary>
+            Download the files and folders from the current folder to ZIP archive.
+            Do enter only file or folder names from current folder.
+            </summary>
+            <param name="fileAndFolderNames">The file and folder names from current directory.</param>
+            <param name="destZipArchiveName">The output ZIP archive name. If not set, will be generated the GUID.</param>
+            <param name="destFolderPath">The destination folder on the local machine</param>
+            <returns>The downloaded ZIP archive info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.DownloadFolderAsZIP(System.IO.Stream)">
+            <summary>
+            Download the current folder from cloud as ZIP archive. Downloading limit 4GB.
+            </summary>
+            <param name="destStream">The destination stream.</param>
+            <returns>The simple task.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.DownloadFolderAsZIP">
+            <summary>
+            Download the current folder from cloud as ZIP archive. Downloading limit 4GB.
+            </summary>
+            <returns>The network stream and his length.
+            The length inaccurate for ZIP archive, because it's not possible to compute.
+            Usually, the real length is larger, than specified.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.DownloadFolderAsZIP(System.String,System.String)">
+            <summary>
+            Download the current folder from cloud as ZIP archive. Downloading limit 4GB.
+            </summary>
+            <param name="destZipArchiveName">The destination ZIP archive name. If not set, will bw use the original folder name.</param>
+            <param name="destFolderPath">The destination file path on the local machine.</param>
+            <returns>The downloaded ZIP archive on the local machine.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.CreateFolder(System.String)">
+            <summary>
+            Create the new folder in the current folder.
+            </summary>
+            <param name="folderName">The new folder name.</param>
+            <returns>The created folder info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.UploadFile(System.String)">
+            <summary>
+            Upload the file in the cloud.
+            </summary>
+            <param name="sourceFilePath">The source file path on the local machine.</param>
+            <returns>The created file info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.UploadFile(System.String,System.IO.Stream)">
+            <summary>
+            Upload the file in the cloud.
+            </summary>
+            <param name="fileName">The file name.</param>
+            <param name="content">The content as stream.</param>
+            <returns>The created file info.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.AbortAllAsyncTasks(System.Boolean)">
+            <summary>
+            Abort the run asynchronous tasks. Will be affected on download and upload operations.
+            </summary>
+            <param name="throwOnFirstException">True, if exception should immedeately propagate; otherwase, false.</param>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.UpdateFolderInfo(System.Boolean)">
+            <summary>
+            Update the folder info if required.
+            </summary>
+            <param name="forceUpdate">When true, the folder info will be updated anyway.</param>
+            <returns>The simple task.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Folder.OnChangedFolderContent(MailRuCloudClient.Data.Folder)">
+            <summary>
+            Function to set data for <see cref="E:MailRuCloudClient.Data.Folder.FolderContentChangedEvent"/>.
+            </summary>
+            <param name="e">The changed folder info.</param>
+        </member>
+        <member name="T:MailRuCloudClient.Data.History">
+            <summary>
+            Defines the file modification history.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.History.Id">
+            <summary>
+            Gets the unique ID of the current history.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.History.LastModifiedTimeUTC">
+            <summary>
+            Gets last modified time of file in UTC format.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.History.Name">
+            <summary>
+            Gets the name of the file.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.History.FullPath">
+            <summary>
+            Gets the full path of the file in the cloud.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.History.Size">
+            <summary>
+            Gets the file size.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.History.IsCurrentVersion">
+            <summary>
+            Gets a value indicating whether the file is current version of history.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.History.Revision">
+            <summary>
+            Gets the revision.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.History.Hash">
+            <summary>
+            Gets the file hash for the current file modification.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.History.LastModifiedTimeUnix">
+            <summary>
+            Gets or sets the last modified time of file in UNIX format.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.History.SizeBytes">
+            <summary>
+            Gets or sets the file size in bytes.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Data.Rates.CostItem">
+            <summary>
+            Defines the cost item.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.CostItem.Cost">
+            <summary>
+            Gets the cost of rate.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.CostItem.Currency">
+            <summary>
+            Gets the currency of rate.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.CostItem.Id">
+            <summary>
+            Gets the unique ID.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.CostItem.SpecialCost">
+            <summary>
+            Gets the special cost of rate.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.CostItem.Duration">
+            <summary>
+            Gets the duration of rate.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.CostItem.SpecialDuration">
+            <summary>
+            Gets the special duration of rate.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.CostItem.DurationStr">
+            <summary>
+            Gets or sets the duration of rate as string.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.CostItem.SpecialDurationStr">
+            <summary>
+            Gets or sets the special diration of rate as string.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Rates.CostItem.ConvertDuration(System.String)">
+            <summary>
+            Convert the string duration to object.
+            </summary>
+            <param name="duration">The source duration.</param>
+            <returns>Converted duration.</returns>
+        </member>
+        <member name="T:MailRuCloudClient.Data.Rates.Duration">
+            <summary>
+            Defines the duration of fare.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.Duration.MonthsCount">
+            <summary>
+            Gets the number of months.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.Duration.DaysCount">
+            <summary>
+            Gets the number of days.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Data.Rates.Rate">
+            <summary>
+            Defines the rate info.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Data.Rates.Rate.name">
+            <summary>
+            The rate name.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.Rate.Name">
+            <summary>
+            Gets the rate name.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.Rate.IsActive">
+            <summary>
+            Gets a value indicating whether is active the current rate.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.Rate.Id">
+            <summary>
+            Gets the unique ID.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.Rate.IsAvailable">
+            <summary>
+            Gets a value indicating whether is available to turn on.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.Rate.Size">
+            <summary>
+            Gets the additional size, which will be applied for cloud disk.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.Rate.Cost">
+            <summary>
+            Gets the cost info of the current rate.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.Rate.SizeBytes">
+            <summary>
+            Gets or sets the additional size in bytes, which will be applied for cloud disk.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Data.Rates.Rates">
+            <summary>
+            Defines the rates.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Rates.Rates.Items">
+            <summary>
+            Gets the rates array.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Data.Shard.ShardInfo">
+            <summary>
+            Defines the shard info.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Shard.ShardInfo.Count">
+            <summary>
+            Gets or sets the number of shard of the current type.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Shard.ShardInfo.Url">
+            <summary>
+            Gets or sets the shard URL.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Data.Shard.ShardsList">
+            <summary>
+            Defines the different type shards list.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Shard.ShardsList.Video">
+            <summary>
+            Gets or sets the video type shards.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Shard.ShardsList.ViewDirect">
+            <summary>
+            Gets or sets the view direct shards.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Shard.ShardsList.WeblinkView">
+            <summary>
+            Gets or sets the weblink view shards.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Shard.ShardsList.WeblinkVideo">
+            <summary>
+            Gets or sets the weblink video shards.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Shard.ShardsList.WeblinkGet">
+            <summary>
+            Gets or sets the weblink get shards.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Shard.ShardsList.Stock">
+            <summary>
+            Gets or sets the stock shards.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Shard.ShardsList.WeblinkThumbnails">
+            <summary>
+            Gets or sets the weblink thumbnails shards.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Shard.ShardsList.Web">
+            <summary>
+            Gets or sets the web shards.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Shard.ShardsList.Auth">
+            <summary>
+            Gets or sets the authorization shards.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Shard.ShardsList.View">
+            <summary>
+            Gets or sets the view shards.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Shard.ShardsList.Get">
+            <summary>
+            Gets or sets the get type shards.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Shard.ShardsList.Upload">
+            <summary>
+            Gets or sets the upload shards.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Shard.ShardsList.Thumbnails">
+            <summary>
+            Gets or sets the thumbnails shards.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Data.StorageUnit">
+            <summary>
+            Defines storage units of disk size.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Data.StorageUnit.Byte">
+            <summary>
+            Byte unit.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Data.StorageUnit.Kb">
+            <summary>
+            Kilobyte unit.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Data.StorageUnit.Mb">
+            <summary>
+            Megabyte unit.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Data.StorageUnit.Gb">
+            <summary>
+            Gigabyte unit.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Data.StorageUnit.Tb">
+            <summary>
+            Terabyte unit.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Data.Size">
+            <summary>
+            Defines item size in cloud.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Size.#ctor(System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.Data.Size" /> class.
+            </summary>
+            <param name="sourceValue">Default value in bytes.</param>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Size.DefaultValue">
+            <summary>
+            Gets default value in bytes.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Size.NormalizedValue">
+            <summary>
+            Gets normalized auto detected value.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Size.NormalizedType">
+            <summary>
+            Gets normalized auto detected storage unit.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Data.Size.SetNormalizedValue">
+            <summary>
+            Detect normalized value and storage unit.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Data.Tree">
+            <summary>
+            Defines the cloud structure
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Tree.Folders">
+            <summary>
+            Gets the list of folders.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Data.Tree.Files">
+            <summary>
+            Gets the list of files
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Events.ProgressChangedEventArgs">
+            <summary>
+            Defines the progress changing event argument.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Events.ProgressChangedEventArgs.#ctor(System.Int32,System.Int64,System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.Events.ProgressChangedEventArgs" /> class.
+            </summary>
+            <param name="progressPercentage">The progress percentage.</param>
+            <param name="totalBytes">The total bytes.</param>
+            <param name="bytesInProgress">The bytes in progress.</param>
+        </member>
+        <member name="P:MailRuCloudClient.Events.ProgressChangedEventArgs.ProgressPercentage">
+            <summary>
+            Gets the progress percentage.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Events.ProgressChangedEventArgs.State">
+            <summary>
+            Gets the progress state.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Events.ProgressChangeTaskState">
+            <summary>
+            Task state is used for progress changed event.
+            </summary>
+        </member>
+        <member name="P:MailRuCloudClient.Events.ProgressChangeTaskState.TotalBytes">
+            <summary>
+            Gets the total operation bytes.
+            </summary>
+            <value>Total bytes.</value>
+        </member>
+        <member name="P:MailRuCloudClient.Events.ProgressChangeTaskState.BytesInProgress">
+            <summary>
+            Gets the bytes in progress for currently operation.
+            </summary>
+            <value>Bytes in progress.</value>
+        </member>
+        <member name="T:MailRuCloudClient.Exceptions.ErrorCode">
+            <summary>
+            Defines the cloud  client error codes.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Exceptions.ErrorCode.None">
+            <summary>
+            The error code is not defined.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Exceptions.ErrorCode.PathNotExists">
+            <summary>
+            The path does not exists.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Exceptions.ErrorCode.UploadingSizeLimit">
+            <summary>
+            The maximum uploading size limit.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Exceptions.ErrorCode.DownloadingSizeLimit">
+            <summary>
+            The maximum downloading size limit.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Exceptions.ErrorCode.DifferentParentPaths">
+            <summary>
+            The cloud structure items have a different parent folders.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Exceptions.ErrorCode.HistoryNotExists">
+            <summary>
+            The file history does not found.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Exceptions.ErrorCode.NotSupportedOperation">
+            <summary>
+            The operation is not supported.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Exceptions.ErrorCode.PublicLinkNotExists">
+            <summary>
+            The public link does not exists.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Exceptions.CloudClientException">
+            <summary>
+            Defines the cloud client exception.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Exceptions.CloudClientException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.Exceptions.CloudClientException" /> class.
+            </summary>
+            <param name="message">Error message.</param>
+        </member>
+        <member name="M:MailRuCloudClient.Exceptions.CloudClientException.#ctor(System.String,MailRuCloudClient.Exceptions.ErrorCode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.Exceptions.CloudClientException" /> class.
+            </summary>
+            <param name="message">Error message.</param>
+            <param name="errorCode">Error code or any other additional info.</param>
+        </member>
+        <member name="M:MailRuCloudClient.Exceptions.CloudClientException.#ctor(System.String,System.String,MailRuCloudClient.Exceptions.ErrorCode)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.Exceptions.CloudClientException" /> class.
+            </summary>
+            <param name="message">Error message.</param>
+            <param name="source">The object was throws this exception.</param>
+            <param name="errorCode">Error code or any other additional info.</param>
+        </member>
+        <member name="M:MailRuCloudClient.Exceptions.CloudClientException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.Exceptions.CloudClientException" /> class.
+            </summary>
+            <param name="message">Error message.</param>
+            <param name="innerException">Inner exception.</param>
+        </member>
+        <member name="T:MailRuCloudClient.Exceptions.NotAuthorizedException">
+            <summary>
+            Defines exception for account.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Exceptions.NotAuthorizedException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.Exceptions.NotAuthorizedException" /> class.
+            </summary>
+            <param name="message">Error message.</param>
+        </member>
+        <member name="M:MailRuCloudClient.Exceptions.NotAuthorizedException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.Exceptions.NotAuthorizedException" /> class.
+            </summary>
+            <param name="message">Error message.</param>
+            <param name="parameter">Error code or any other additional info.</param>
+        </member>
+        <member name="M:MailRuCloudClient.Exceptions.NotAuthorizedException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.Exceptions.NotAuthorizedException" /> class.
+            </summary>
+            <param name="message">Error message.</param>
+            <param name="innerException">Inner exception.</param>
+        </member>
+        <member name="T:MailRuCloudClient.HttpContent.ProgressableStreamContent">
+            <summary>
+            Defines the progressable stream content for HTTP client requests.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.HttpContent.ProgressableStreamContent.content">
+            <summary>
+            The input stream to write.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.HttpContent.ProgressableStreamContent.cancelationToken">
+            <summary>
+            Async tasks cancelation token.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.HttpContent.ProgressableStreamContent.#ctor(System.IO.Stream,MailRuCloudClient.CloudClient.ProgressChangedEventHandler,System.Threading.CancellationTokenSource)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MailRuCloudClient.HttpContent.ProgressableStreamContent"/> class.
+            </summary>
+            <param name="stream">The input stream.</param>
+            <param name="progressEventHandler">The progress event handler.</param>
+            <param name="cancelToken">The cancelation token.</param>
+        </member>
+        <member name="E:MailRuCloudClient.HttpContent.ProgressableStreamContent.ProgressChangedEvent">
+            <summary>
+            Changing progress event, works only for upload and download operations.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.HttpContent.ProgressableStreamContent.SerializeToStreamAsync(System.IO.Stream,System.Net.TransportContext)">
+            <summary>
+            Write the input stream to network.
+            </summary>
+            <param name="stream">The input stream.</param>
+            <param name="context">The transport context.</param>
+            <returns>The simple task.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.HttpContent.ProgressableStreamContent.Dispose(System.Boolean)">
+            <summary>
+            Dispose the resources.
+            </summary>
+            <param name="disposing">When true, the disposing will be applied.</param>
+        </member>
+        <member name="T:MailRuCloudClient.Static.Helpers.ContentType">
+            <summary>
+            Defines the content type helper.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Helpers.ContentType.MimeTypesList">
+            <summary>
+            The MIME types list.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Static.Helpers.ContentType.GetContentType(System.String)">
+            <summary>
+            Get content type by file extension.
+            </summary>
+            <param name="extension">The file extension.</param>
+            <returns>The computed content type.</returns>
+        </member>
+        <member name="T:MailRuCloudClient.Static.Helpers.HttpClientInitializer">
+            <summary>
+            Defines the HTTP client initializer.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Static.Helpers.HttpClientInitializer.Create(MailRuCloudClient.Account,System.String)">
+            <summary>
+            Create the HTTP client as new, if in the account entity does not exists or the host is modified, else will be returned an existing.
+            </summary>
+            <param name="account">An existing account.</param>
+            <param name="host">The base address.</param>
+            <returns>The created HTTP client with the new host address.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Static.Helpers.HttpClientInitializer.GetStringAsync(System.Net.Http.HttpClient,System.String,System.Object[])">
+            <summary>
+            Send the GET request and receive result as string.
+            </summary>
+            <param name="httpClient">The HTTP client or sender.</param>
+            <param name="requestUri">The request URL.</param>
+            <param name="uriFormat">The format of request URL.</param>
+            <returns>The response as string.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Static.Helpers.HttpClientInitializer.GetAsync(System.Net.Http.HttpClient,System.String,System.Object[])">
+            <summary>
+            Send the GET request and receive result as <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+            <param name="httpClient">The HTTP client or sender.</param>
+            <param name="requestUri">The request URL.</param>
+            <param name="uriFormat">The format of request URL.</param>
+            <returns>The response as <see cref="T:System.Net.Http.HttpResponseMessage"/>.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Static.Helpers.HttpClientInitializer.PostAsync(System.Net.Http.HttpClient,System.String,System.Net.Http.HttpContent,System.Object[])">
+            <summary>
+            Send the POST request and receive result as <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+            <param name="httpClient">The HTTP client or sender.</param>
+            <param name="requestUri">The request URL.</param>
+            <param name="content">The HTTP content.</param>
+            <param name="uriFormat">The format of request URL.</param>
+            <returns>The response as <see cref="T:System.Net.Http.HttpResponseMessage"/>.</returns>
+        </member>
+        <member name="M:MailRuCloudClient.Static.Helpers.HttpClientInitializer.ToFormUrlEncodedContent(System.Collections.Generic.List{System.Collections.Generic.KeyValuePair{System.String,System.Object}})">
+            <summary>
+            Convert the value/pair list to form URL encoded content.
+            </summary>
+            <param name="source">The valie/pait list.</param>
+            <returns>The converted content for HTTP client.</returns>
+        </member>
+        <member name="T:MailRuCloudClient.Static.Helpers.StreamHelper">
+            <summary>
+            Defines the streams helper.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Static.Helpers.StreamHelper.CopyToAsync(System.IO.Stream,System.Int64,System.IO.Stream,MailRuCloudClient.CloudClient.ProgressChangedEventHandler,System.Object,System.Threading.CancellationTokenSource)">
+            <summary>
+            Porgressable write one stream to another.
+            </summary>
+            <param name="inputStream">The input stream.</param>
+            <param name="inputStreamLength">The input stream length.</param>
+            <param name="outputStream">The output stream.</param>
+            <param name="progressEventHandler">The progress checking event.</param>
+            <param name="sender">The owner of this call.</param>
+            <param name="cancelToken">The cancelation token.</param>
+            <returns>The simple task.</returns>
+        </member>
+        <member name="T:MailRuCloudClient.Static.Helpers.StringHelper">
+            <summary>
+            Defines the extension to work with the strings.
+            </summary>
+        </member>
+        <member name="M:MailRuCloudClient.Static.Helpers.StringHelper.Deserialize``1(System.String)">
+            <summary>
+            Deserialize the JSON to <see cref="!:DefaultResponse"/> object.
+            </summary>
+            <typeparam name="T">The body node object type.</typeparam>
+            <param name="json">The JSON which will be deserialized.</param>
+            <returns>Deserialized object.</returns>
+        </member>
+        <member name="T:MailRuCloudClient.Static.HttpHeaders">
+            <summary>
+            Defines the HTTP headers.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.HttpHeaders.UserAgent">
+            <summary>
+            Default user agent for requests.
+            </summary>
+        </member>
+        <member name="T:MailRuCloudClient.Static.Urls">
+            <summary>
+            Default application settings.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.BaseMailRuCloud">
+            <summary>
+            The base address of cloud.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.BaseMailRuAuth">
+            <summary>
+            The base authorization address of MAILRU.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.Auth">
+            <summary>
+            The authorization URL.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.EnsureSdc">
+            <summary>
+            The address to ensure SDC cookies.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.AuthToken">
+            <summary>
+            The authorization token getting URL.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.DiskSpace">
+            <summary>
+            The disk space info.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.ItemsList">
+            <summary>
+            The cloud items list.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.PublicLink">
+            <summary>
+            The start of public link.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.Dispatcher">
+            <summary>
+            The shards info.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.UploadFile">
+            <summary>
+            The upload file link.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.CreateFileOrFolder">
+            <summary>
+            Create the file or folder record on cloud structure.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.CreateZipArchive">
+            <summary>
+            Prepare the ZIP archive to download.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.FileRequest">
+            <summary>
+            The any file request start with this URL.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.Rename">
+            <summary>
+            Rename the file or folder.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.Remove">
+            <summary>
+            Remove the file or folder.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.History">
+            <summary>
+            Get the file history.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.Rates">
+            <summary>
+            Get the rates.
+            </summary>
+        </member>
+        <member name="F:MailRuCloudClient.Static.Urls.DownloadToken">
+            <summary>
+            One time downloading token.
+            </summary>
+        </member>
+    </members>
+</doc>
