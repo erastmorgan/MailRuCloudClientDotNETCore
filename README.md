@@ -1,9 +1,9 @@
 # MailRuCloudClientDotNETCore  
 It is .net core version of client for cloud.mail.ru
 
-### Nuget
+### Actual Nuget version
 https://www.nuget.org/packages/MailRuCloudClient  
-PM> Install-Package MailRuCloudClient -Version 1.0.3  
+PM> Install-Package MailRuCloudClient -Version 1.0.4  
 
 ### Usage  
 All examples of use, you can find in the tests:  
