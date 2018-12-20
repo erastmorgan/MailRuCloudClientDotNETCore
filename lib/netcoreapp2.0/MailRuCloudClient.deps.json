@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.0": {
-      "MailRuCloudClient/1.0.3": {
+      "MailRuCloudClient/1.0.4": {
         "dependencies": {
           "Newtonsoft.Json": "11.0.2"
         },
@@ -16,13 +16,16 @@
       },
       "Newtonsoft.Json/11.0.2": {
         "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "11.0.0.0",
+            "fileVersion": "11.0.2.21924"
+          }
         }
       }
     }
   },
   "libraries": {
-    "MailRuCloudClient/1.0.3": {
+    "MailRuCloudClient/1.0.4": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

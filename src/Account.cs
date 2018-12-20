@@ -220,8 +220,8 @@ namespace MailRuCloudClient
             var responseParsed = responseStr.Deserialize<JToken>();
             return new DiskUsage
             {
-                Total = new Size((long)responseParsed["total"] * 1024L * 1024L),
-                Used = new Size((long)responseParsed["used"] * 1024L * 1024L)
+                Total = new Size((long)responseParsed["bytes_total"] * 1024L * 1024L),
+                Used = new Size((long)responseParsed["bytes_used"] * 1024L * 1024L)
             };
         }
 

@@ -5,12 +5,11 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Erast Korolev</Authors>
     <Copyright>Erast Korolev</Copyright>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
     <Description>Unofficial .NET Core version of library to working with the cloud.mail.ru API</Description>
     <RepositoryUrl>https://github.com/erastmorgan/MailRuCloudClientDotNETCore</RepositoryUrl>
     <PackageProjectUrl>https://github.com/erastmorgan/MailRuCloudClientDotNETCore</PackageProjectUrl>
-    <PackageReleaseNotes>- long async tasks cancelation method added
-- code documentation added to nuget</PackageReleaseNotes>
+    <PackageReleaseNotes>- DTO of disk usage request is changed</PackageReleaseNotes>
     <PackageTags>cloud.mail.ru sdk mail.ru client</PackageTags>
     <RepositoryType>Git</RepositoryType>
   </PropertyGroup>
