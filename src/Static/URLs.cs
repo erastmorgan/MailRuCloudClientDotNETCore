@@ -94,7 +94,7 @@ namespace MailRuCloudClient.Static
         /// <summary>
         /// Get the rates.
         /// </summary>
-        public const string Rates = "/api/v2/billing/rates?api=2email={0}&x-email={0}&token={1}";
+        public const string Rates = "/api/v2/billing/rates?api=2&email={0}&x-email={0}&token={1}";
 
         /// <summary>
         /// One time downloading token.
